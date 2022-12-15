@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox")
+require("./tasks")
 require("dotenv").config()
 
 module.exports = {

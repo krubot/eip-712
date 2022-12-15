@@ -60,20 +60,6 @@ async function main() {
     var example = Example.attach(process.env.GOERLI_EIP_712_CONTRACT);
     console.log("Contract has already been deployed at: ",process.env.GOERLI_EIP_712_CONTRACT);
   }
-
-  const sig = await account._signTypedData(domain, types, value);
-  console.log("Typed data signature: ",sig);
-
-  const sigSplit = ethers.utils.splitSignature(sig);
-  console.log("Typed data split signature v: ",sigSplit.v);
-  console.log("Typed data split signature r: ",sigSplit.r);
-  console.log("Typed data split signature s: ",sigSplit.s);
-
-  const sigAddress = ethers.utils.recoverAddress(ethers.utils._TypedDataEncoder.hash(domain, types, value),sig);
-  console.log("Signature recovery address: ",sigAddress);
-
-  const contractVerify = await example.verify(value,sigSplit.v,sigSplit.r,sigSplit.s);
-  console.log("Contract verification check: ",contractVerify);
 }
 
 main().catch((error) => {

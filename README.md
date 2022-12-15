@@ -27,20 +27,36 @@ To compile this solidity code you'll need to run hardhat cli using `npx` like th
 npx hardhat compile
 ```
 
-Now you should be able to deploy your contract to goerli and run some verification transactions. To do this run the following:
+Now you should be able to deploy your contract to goerli. To do this run the following:
 
 ```
-npx hardhat run
+npx hardhat run scripts/deploy.js
 ```
 
 Your output should look like the following:
 
 ```
-(node:72440) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(node:1024785) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 Deploying contracts with the account:  0xA7b192eBA8E0B07e2D25c632986fA4cB2666bB9f
-Account balance:  317581165029412870
-Contract has been deployed at:  0x08864eC0302B911BF0E9764f3C7EeC12bcC51597
+Account balance:  305587835267561840
+Transaction hash of the deployment:  0x80e3ce93356c5d58106949fe7eb8e8f5594bc33a0ac4ca6210f51ae91ba206f1
+Contract has been deployed at:  0x0BD00f03C59153F32C20746410cBB4c315F1767E
+```
+
+## Verification check
+
+To verify the typedata deployment you can run the check command as follows:
+
+```
+npx hardhat check
+```
+
+Your output should then look like the following:
+
+```
+(node:1018298) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
 Typed data signature:  0x31d49d9682b899057cedb3bcabd3f8a57e046f9e19d8dd67b99228dfda30227b1a5c8a36b4934e70e76da7b4eb47c4af3e3454d98a869eb2f8aa70663bf2db1e1c
 Typed data split signature v:  28
 Typed data split signature r:  0x31d49d9682b899057cedb3bcabd3f8a57e046f9e19d8dd67b99228dfda30227b
