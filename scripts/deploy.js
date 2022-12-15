@@ -1,3 +1,6 @@
+require("dotenv").config();
+
+const { writeFileSync } = require("fs");
 const { ethers } = require("hardhat");
 
 async function main() {
@@ -42,11 +45,21 @@ async function main() {
   console.log("Account balance: ", (await account.getBalance()).toString());
 
   const Example = await ethers.getContractFactory("Example");
-  const example = await Example.deploy();
 
-  await example.deployed();
+  if (process.env.GOERLI_EIP_712_CONTRACT == null) {
+    var example = await Example.deploy();
 
-  console.log("Contract has been deployed at: ",example.address);
+    console.log("Transaction hash of the deployment: ", example.deployTransaction.hash);
+
+    await example.deployed();
+
+    console.log("Contract has been deployed at: ",example.address);
+
+    writeFileSync('.env','GOERLI_EIP_712_CONTRACT=\'' + example.address + '\'\n',{flag:'a+'});
+  } else {
+    var example = Example.attach(process.env.GOERLI_EIP_712_CONTRACT);
+    console.log("Contract has already been deployed at: ",process.env.GOERLI_EIP_712_CONTRACT);
+  }
 
   const sig = await account._signTypedData(domain, types, value);
   console.log("Typed data signature: ",sig);
